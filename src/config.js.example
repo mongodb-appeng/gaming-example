@@ -1,0 +1,9 @@
+const config = {
+    gamePlatformServicesURI: 'http://localhost:8888', 
+    appName: 'gaming-solution-kit',
+    appId: 'SITCHAPPNAME',
+    database: 'DDD',
+    collectionTest: 'CCC'
+}
+
+module.exports = config;
