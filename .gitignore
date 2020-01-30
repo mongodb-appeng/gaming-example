@@ -3,4 +3,4 @@ node_modules
 node_modules/
 RECYCLE_BIN/*
 RECYCLE_BIN/*
-docker/env.list
+docker/env.listdist/*

@@ -13,6 +13,7 @@ import {
   UserPasswordAuthProviderClient
 } from "mongodb-stitch-browser-sdk"
 
+const config = require('config')
 const myAuthListener = {
 
   onUserLoggedIn: (auth, loggedInUser) => {
@@ -100,12 +101,12 @@ const actions = {
   async init({ commit, state }) {
     if (!state.hasStitchInitialized) {
       try {
-        const s = Stitch.getAppClient(global.gConfig.realm_app_id);
+        const s = Stitch.getAppClient(config.get('gamePlatformServices.appID'));
         commit('INIT', s)
       }
       catch {
         // The default client hasn't been set yet
-        const s = Stitch.initializeDefaultAppClient(global.gConfig.realm_app_id)
+        const s = Stitch.initializeDefaultAppClient(config.get('gamePlatformServices.appID'));
         commit('INIT', s)
       }
     }
@@ -163,7 +164,7 @@ const mutations = {
   },
   LOGIN(state, payload) {
 
-    const { auth } = state.stitchClientmongodb-appeng/gaming-services-api
+    const { auth } = state.stitchClient
     auth.loginWithCredential(payload)
       .then(() => {
         state.logInError = null

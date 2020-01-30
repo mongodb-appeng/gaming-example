@@ -1,6 +1,6 @@
 {
-    "app_name": "a simple gaming webapp",
-    "app_desc": "Simple Tit-Tac-Toe web game integraded with Gaming Platform Services.",
-    "node_port": 3000,
-    "json_indentation": 2
+    "appName": "a simple gaming webapp",
+    "appDesc": "Simple Tit-Tac-Toe web game integraded with Gaming Platform Services.",
+    "nodePort": 3000,
+    "jsonIndentation": 2
 }
