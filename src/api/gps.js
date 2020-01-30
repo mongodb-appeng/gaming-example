@@ -4,13 +4,10 @@
  */
 
 
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-import config from '../config.js'
 const axios = require('axios').default;
 const instance = axios.create({
-  baseURL: config.gamePlatformServicesURI,
-  timeout: 10000
+  baseURL: global.gConfig.game_platform_services_uri,
+  timeout:  global.gConfig.game_platform_services_timeout
 });
 
 export default {

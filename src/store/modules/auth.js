@@ -6,7 +6,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 import gps from '../../api/gps'
-import config from '../../config.js'
 
 import {
   Stitch,
@@ -15,10 +14,7 @@ import {
 } from "mongodb-stitch-browser-sdk"
 
 const myAuthListener = {
-  // onUserAdded: (auth, addedUser) => {
-  //   /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
-  //   console.log('onUserAdded:', addedUser)
-  // },
+
   onUserLoggedIn: (auth, loggedInUser) => {
 
     var cache = [];
@@ -42,49 +38,24 @@ const myAuthListener = {
     gps.instance.put('/v1/account/' + accountDocument.id, accountDocument)
       .then(function () {
 
-        // console.log('/v1/account/' + loggedInUser.profile.email, response.data);
-
       })
       .catch(function (error) {
         if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
-          /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
+           } else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
           // http.ClientRequest in node.js
-          /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
-          console.log(error.request);
         } else {
           // Something happened in setting up the request that triggered an Error
         }
-        /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
-        console.log(error.config);
       });
   },
-  // onActiveUserChanged: (auth, currentActiveUser, previousActiveUser) => {
-  //   /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
-  //   console.log('onActiveUserChanged:', currentActiveUser, previousActiveUser)
-  // },
   onUserLoggedOut: (auth, loggedOutUser) => {
     /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
     console.log('onUserLoggedOut:', loggedOutUser.profile)
   },
-  // onUserRemoved: (auth, removedUser) => {
-  //   /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
-  //   console.log('onUserRemoved:', removedUser.profile)
-  // },
-  // onUserLinked: (auth, linkedUser) => {
-  //   /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
-  //   console.log('onUserLinked:', linkedUser.profile)
-  // },
-  // onListenerRegistered: () => {
-  //   console.log('onListenerRegistered')
-  // },
 };
 
 // initial state
@@ -129,12 +100,12 @@ const actions = {
   async init({ commit, state }) {
     if (!state.hasStitchInitialized) {
       try {
-        const s = Stitch.getAppClient(config.appId);
+        const s = Stitch.getAppClient(global.gConfig.realm_app_id);
         commit('INIT', s)
       }
       catch {
         // The default client hasn't been set yet
-        const s = Stitch.initializeDefaultAppClient(config.appId)
+        const s = Stitch.initializeDefaultAppClient(global.gConfig.realm_app_id)
         commit('INIT', s)
       }
     }
@@ -192,7 +163,7 @@ const mutations = {
   },
   LOGIN(state, payload) {
 
-    const { auth } = state.stitchClient
+    const { auth } = state.stitchClientmongodb-appeng/gaming-services-api
     auth.loginWithCredential(payload)
       .then(() => {
         state.logInError = null

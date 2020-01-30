@@ -1,30 +1,46 @@
-# Humongous Microgames
+# Mongo Mega Microgames
 
-This is an example of how to build a gaming app using the MongoDB Platform.
+This is an example web application game, Tic Tac Toe. It's written in VueJS/Vuex/Bulma and uses game platform services via Axios HTTP calls. The auth portion is done via the Realm SDK.
 
-__NOTE__ This project structure follows the VUEX layout specified [here](https://vuex.vuejs.org/guide/structure.html#application-structure)
+__NOTE__ This project structure follows the Vuex layout specified [here](https://vuex.vuejs.org/guide/structure.html#application-structure)
 
-## Commands
+### To run in a docker container
 
-__NOTE__ Ensure the Game Platform Services are running on :8888. If using a different port, update the `config.js` file accordingly.
+Pre-reqs
+- [Game Platform Services](https://github.com/mongodb-appeng/gaming-services-api)  (GPS) is running
+- Edit and rename `docker/env.list.example` to `docker/env.list`
+
+```bash
+# run this example
+docker run --rm -it -p 8888:8888 -p 3333:3000 --env-file docker/env.list --hostname gaming.local nullstring/gaming-example
+
+
+# ---------------------------------------------------
+# other stuff 
+##  re-build the image
+docker build -t nullstring/gaming-example .
+
+## adhoc testing inside the container
+git clone https://github.com/mongodb-appeng/gaming-example
+cd gaming-example
+docker run --rm -it -v $PWD:/root/gaming-example  -p 3333:3000 -p 8888:8888 --entrypoint /bin/bash --hostname gaming-dev.local nullstring/gaming-exmaple -c "npm install config serve"
+```
+
+## To run locally
+
+Pre-reqs
+- [Game Platform Services](https://github.com/mongodb-appeng/gaming-services-api) (GPS) is running
+- Env vars `GPS_REALM_APP_ID` and `GPS_URI` are set
 
 ```bash
 ## Setup
-npm install
+npm install config
 
 ### Development
-npm run serve
+npm serve
 
 ### Production
 npm run build
-
-
-### Test
-npm run test
-
-
-### Lint
-npm run lint
 ```
 
-__made by MongoDB with <3__
+__made by mongoDB with <3__
