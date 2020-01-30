@@ -37,7 +37,7 @@ Pre-reqs
 npm install config
 
 ### Development
-npm serve
+npm run serve
 
 ### Production
 npm run build
