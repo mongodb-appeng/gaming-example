@@ -1,6 +1,6 @@
 public/*
 node_modules
 node_modules/
-RECYCLE_BIN/*
-RECYCLE_BIN/*
+RECYCLEBIN/*
+RECYCLEBIN/*
 docker/env.listdist/*

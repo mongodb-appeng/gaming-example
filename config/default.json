@@ -1,6 +1,0 @@
-{
-    "appName": "a simple gaming webapp",
-    "appDesc": "Simple Tit-Tac-Toe web game integraded with Gaming Platform Services.",
-    "nodePort": 3000,
-    "jsonIndentation": 2
-}

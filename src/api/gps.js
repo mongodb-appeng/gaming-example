@@ -3,10 +3,9 @@
  * Game Platform Services API calls using Axios
  */
 
-const config = require('config')
 const axios = require('axios').default;
 const instance = axios.create({
-  baseURL:config.get('gamePlatformServices.uri'),
+  baseURL:process.env.GPS_URI,
   timeout: 10000
 });
 

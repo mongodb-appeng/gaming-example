@@ -13,7 +13,6 @@ import {
   UserPasswordAuthProviderClient
 } from "mongodb-stitch-browser-sdk"
 
-const config = require('config')
 const myAuthListener = {
 
   onUserLoggedIn: (auth, loggedInUser) => {
@@ -101,12 +100,12 @@ const actions = {
   async init({ commit, state }) {
     if (!state.hasStitchInitialized) {
       try {
-        const s = Stitch.getAppClient(config.get('gamePlatformServices.appID'));
+        const s = Stitch.getAppClient(process.env.GPS_REALM_APP_ID);
         commit('INIT', s)
       }
       catch {
         // The default client hasn't been set yet
-        const s = Stitch.initializeDefaultAppClient(config.get('gamePlatformServices.appID'));
+        const s = Stitch.initializeDefaultAppClient(process.env.GPS_REALM_APP_ID);
         commit('INIT', s)
       }
     }
