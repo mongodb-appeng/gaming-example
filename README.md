@@ -34,7 +34,7 @@ Pre-reqs
 
 ```bash
 ## Setup
-npm install config
+npm install
 
 ### Development
 npm run serve
